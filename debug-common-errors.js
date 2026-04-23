@@ -24,39 +24,48 @@ Think about which debugging methods you found most useful and how you might appl
 // Description:
 // This program is intended to display a simple prompt in the console but fails to run.
 
-console.log("Welcome to the bootcamp
+// ERROR TYPE: Syntax error - unterminated string literal and missing closing parenthesis
+console.log("Welcome to the bootcamp");
 
-// What’s Wrong?
+// What's Wrong?
+// The string literal had no closing quote and the call was missing the closing ).
+// JavaScript threw a SyntaxError before any code could run.
 
 
 // Program B
 // Description:
 // This code attempts to multiply each number in an array by 2 and display the results. However, it crashes at runtime.
 
-let numbers = [2, 4, "eight"];
+// ERROR TYPE: Runtime / type error - string value "eight" in a numeric array produces NaN when multiplied
+let numbers = [2, 4, 8];   // replace "eight" with the number 8
 for (let i = 0; i < numbers.length; i++) {
   let doubled = numbers[i] * 2;
   console.log(doubled);
 }
 
-// What’s Wrong?
-
+// What's Wrong?
+// Multiplying the string "eight" by 2 yields NaN because "eight" cannot be
+// coerced to a number. Using the numeric literal 8 produces the expected 16.
 
 
 // Program C (Logic Error)
 // Description:
 // This snippet of code is supposed to check if a given number is prime (i.e., divisible only by 1 and itself). However, it incorrectly marks some numbers as prime or not prime.
 
+// ERROR TYPE: Logic error - the inner return should be false (num is NOT prime)
+// and the trailing return should be true (num IS prime). Values were swapped.
 function isPrime(num) {
   if (num < 2) return false;
   for (let i = 2; i < num; i++) {
     if (num % i === 0) {
-      return true;  // Supposed to indicate num is NOT prime
+      return false; // found a divisor - not prime
     }
   }
-  return false; // Supposed to indicate num IS prime
+  return true; // no divisors found - prime
 }
 
-console.log(isPrime(7)); // Expected true but gets false
+console.log(isPrime(7)); // now correctly returns true
 
-// What’s Wrong?
+// What's Wrong?
+// The return values inside and after the loop were inverted: finding a divisor
+// must return false (composite), and reaching the end must return true (prime).
